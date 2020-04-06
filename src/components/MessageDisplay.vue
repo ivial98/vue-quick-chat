@@ -12,7 +12,9 @@
             <OtherMessage v-else :message="message" :async-mode="asyncMode" 
                           :colors="colors"
                           :on-image-clicked="onImageClicked"
-                          :profile-picture-config="profilePictureConfig"/>
+                          :profile-picture-config="profilePictureConfig"
+                          :delete-messages="deleteMessages"
+                          :on-message-deleted="onMessageDeleted"/>
         </div>
     </div>
 </template>
@@ -54,7 +56,16 @@
             profilePictureConfig: {
                 type: Object,
                 required: true
-            }
+            },
+            deleteMessages: {
+                type: Boolean,
+                required: true,
+            },
+            onMessageDeleted: {
+                type: Function,
+                required: false,
+                default: null
+            },
         },
         data() {
             return {
@@ -170,6 +181,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         .message-image-display{

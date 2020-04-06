@@ -9,16 +9,25 @@
                 <p class="message-username-image">{{getParticipantById(message.participantId).name}}</p>
                 <div v-if="message.uploaded" class="message-image">
                     <img class="message-image-display" :src="message.src" alt="" @click="onImageClicked(message)">
+                    <div v-if="deleteMessages" class="delete-message">
+                        <a class="delete-message-button" href="#" @click.prevent="onMessageDeleted(message)">✕</a>
+                    </div>
                 </div>
                 <div v-else class="message-image">
                     <img class="message-image-display img-overlay" :src="message.preview" alt="">
                     <div class="img-loading"></div>
+                    <div v-if="deleteMessages" class="delete-message">
+                        <a class="delete-message-button" href="#" @click.prevent="onMessageDeleted(message)">✕</a>
+                    </div>
                 </div>
             </template>
             <template v-else>
                 <div class="message-text" :style="{background: colors.message.others.bg, color: colors.message.others.text}">
                     <p class="message-username">{{getParticipantById(message.participantId).name}}</p>
                     <p>{{message.content}}</p>
+                    <div v-if="deleteMessages" class="delete-message">
+                        <a class="delete-message-button" href="#" @click.prevent="onMessageDeleted(message)">✕</a>
+                    </div>
                 </div>
             </template>
             <div class="message-timestamp" :style="{'justify-content': 'baseline'}">
@@ -62,7 +71,16 @@
             profilePictureConfig: {
                 type: Object,
                 required: true
-            }
+            },
+            deleteMessages: {
+                type: Boolean,
+                required: true,
+            },
+            onMessageDeleted: {
+                type: Function,
+                required: false,
+                default: null
+            },
         },
         computed: {
             ...mapGetters([
@@ -120,6 +138,18 @@
             white-space: pre-wrap;
             border-bottom-left-radius: 0px;
             word-break: break-word;
+            position: relative;
+        }
+
+        .delete-message {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .delete-message-button {
+            color: white;
+            text-decoration: none;
         }
     }
 </style>

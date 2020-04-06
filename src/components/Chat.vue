@@ -10,7 +10,9 @@
         <MessageDisplay :colors="colors" :async-mode="asyncMode" :load-more-messages="loadMoreMessages"
                         :scroll-bottom="scrollBottom"
                         :on-image-clicked="onImageClicked"
-                        :profile-picture-config="profilePictureConfig"/>
+                        :profile-picture-config="profilePictureConfig"
+                        :delete-messages="deleteMessages"
+                        :on-message-deleted="onMessageDeleted"/>
         <MessageManager :on-type="onType" :on-message-submit="onMessageSubmit" :colors="colors"
                         :border-style="borderStyle" :submit-icon-size="submitIconSize"
                         :submit-image-icon-size="submitImageIconSize"
@@ -161,7 +163,17 @@
                         }
                     }
                 }
-            }
+            },
+            deleteMessages: {
+                type: Boolean,
+                required: false,
+                default: false
+            },
+            onMessageDeleted: {
+                type: Function,
+                required: false,
+                default: () => false
+            },
         },
         watch: {
             participants() {

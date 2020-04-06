@@ -24,6 +24,8 @@
                       :on-image-selected="onImageSelected"
                       :on-image-clicked="onImageClicked"
                       :send-images="true"
+                      :delete-messages="true"
+                      :on-message-deleted="onMessageDeleted"
                       :profile-picture-config="profilePictureConfig"/>
             </div>
             <div class="external-controller">
@@ -332,6 +334,13 @@
                  * You can add your code here to do whatever you need with the image clicked. A common situation is to display the image clicked in full screen.
                  */
                 console.log('Image clicked', message.src)
+            },
+            onMessageDeleted(message){
+                /**
+                 * This is the callback function that is going to be executed when some image is clicked.
+                 * You can add your code here to do whatever you need with the image clicked. A common situation is to display the image clicked in full screen.
+                 */
+                console.log('Message clicked', message)
             }
         }
     }
